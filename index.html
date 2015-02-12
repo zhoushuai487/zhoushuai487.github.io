@@ -74,6 +74,11 @@
 		</div>
 	</div>
 	<script>
+        var restartCSSAnimation = function($element){ 
+            $element.removeClass('');
+            setTimeout(function(){$element.addClass(className);}, 1);
+        }
+
 		if(location.href.indexOf('#') != -1){
 			$('#mask').hide();
 			var anchor = Number(location.href.split('#')[1])-1;
@@ -86,13 +91,15 @@
         $('.section').on('swipeUp',function () {
             if ($(this).hasClass('sec5')) return;
             $(this).animate({'top': '-100%'}, 500, ' ease-out',function () {
-                $(this).removeClass('current');
+                $(this).removeClass('current ani');
             }).next('.section').addClass('current').css({'top': '100%'}).animate({'top': '0'}, 500, ' ease-out',function(){ $(this).addClass('ani');});
         }).on('swipeDown', function () {
-                    if ($(this).hasClass('sec1')) return;
+                    if ($(this).hasClass('sec1')) return;   //Already in the first page
                     $(this).animate({'top': '100%'}, 500, ' ease-out',function () {
-                        $(this).removeClass('current');
+                        $(this).removeClass('current ani');
                     }).prev('.section').addClass('current').css({'top': '-100%'}).animate({'top': '0'}, 500, ' ease-out',function(){ $(this).addClass('ani');});
+                    //restart the CSS
+                    //restartCSSAnimation($(this).pre('.section'))
                 });
 
 
